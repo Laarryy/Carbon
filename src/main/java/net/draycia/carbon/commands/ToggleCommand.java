@@ -35,7 +35,7 @@ public class ToggleCommand {
                 .withArguments(channelArguments)
                 .withAliases(commandSettings.getAliasesArray())
                 .withPermission(CommandPermission.fromString("carbonchat.toggle"))
-                .executesPlayer(this::executeSelf)
+                .executesPlayer(this::toggleSelf)
                 .register();
 
         LinkedHashMap<String, Argument> argumentsOther = new LinkedHashMap<>();
@@ -46,11 +46,11 @@ public class ToggleCommand {
                 .withArguments(argumentsOther)
                 .withAliases(commandSettings.getAliasesArray())
                 .withPermission(CommandPermission.fromString("carbonchat.toggle"))
-                .executes(this::executeOther)
+                .executes(this::toggleOther)
                 .register();
     }
 
-    private void executeSelf(Player player, Object[] args) {
+    private void toggleSelf(Player player, Object[] args) {
         ChatUser user = carbonChat.getUserService().wrap(player);
         ChatChannel channel = (ChatChannel) args[0];
 
@@ -72,7 +72,7 @@ public class ToggleCommand {
                 "color", "<color:" + channel.getChannelColor(user).toString() + ">", "channel", channel.getName()));
     }
 
-    private void executeOther(CommandSender sender, Object[] args) {
+    private void toggleOther(CommandSender sender, Object[] args) {
         ChatUser user = (ChatUser) args[0];
         ChatChannel channel = (ChatChannel) args[1];
 
